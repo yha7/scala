@@ -37,6 +37,4 @@ object Bootstrap extends App {
 
   testDf.show()
 
-  spark.catalog.
-
 }
