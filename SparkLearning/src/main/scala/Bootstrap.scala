@@ -64,10 +64,25 @@ object Bootstrap extends App {
 
 
   val jsonDf = spark.read.json("src/main/resources/data/testData.json")
-  jsonDf.printSchema()
-  jsonDf.show()
+  //jsonDf.printSchema()
+ // jsonDf.show()
 
   val testdf9 = jsonDf.select("skills.storage")
-  testdf9.printSchema()
-  testdf9.show()
+ // testdf9.printSchema()
+ //  testdf9.show()
+
+  // DateTimeFunctions:
+  import org.apache.spark.sql.functions._
+
+  val dtDf = Seq(("2019-01-23 21:00:55.349"),("2019-06-24 21:00:55.349"),("2019-09-20 21:00:55.349"))
+    .toDF("messageTimestamp")
+    .select( col("messageTimestamp"), year(col("messageTimestamp")).as("year"),
+      month(col("messageTimestamp")).as("month"),
+      dayofmonth(col("messageTimestamp")).as("dayofmonth")
+    )
+
+  dtDf.show()
+
+
+
 }
