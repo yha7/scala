@@ -9,7 +9,13 @@ object AltimetricTestBootstrap extends App{
 
   // rawRdd.foreach(println(_))
 
-  rawRdd.foreach(palindromeTest(_))
+  val rddWithLargestPalindromesInEachString = rawRdd.map(palindromeTest(_))
+  println("FinalRESULT::::::::::::::::::::::::::")
+  rddWithLargestPalindromesInEachString.foreach(println(_))
+  val largestPalindromeArray: Array[(String, Int)] = rddWithLargestPalindromesInEachString.collect()
+  val sortedlargestPalindromeArray = largestPalindromeArray.sortBy(x => x._2)
+  val largestSubsetPalindrome = sortedlargestPalindromeArray(sortedlargestPalindromeArray.length-1)
+  println("largestSubsetPalindrome is "+largestSubsetPalindrome)
 
   def palindromeTest(s:String) = {
 
@@ -44,7 +50,7 @@ object AltimetricTestBootstrap extends App{
         // println("The reversed string is " + reversedString)
 
         if (myString == reversedString) {
-          println(s"The string ${reversedString} is a palindrome")
+          //println(s"The string ${reversedString} is a palindrome")
           listOfPalindromes = listOfPalindromes.:+(myString)
         }
 
@@ -52,15 +58,16 @@ object AltimetricTestBootstrap extends App{
 
     })
 
-    println("LISTOFPALINDROME:::::::")
-    listOfPalindromes.foreach(println(_))
+    //println("LISTOFPALINDROME:::::::")
+    //listOfPalindromes.foreach(println(_))
 
     val listOfTuples = listOfPalindromes.map(x => (x,x.length))
 
     val sortedList = listOfTuples.sortBy(x => x._2)
-    sortedList.foreach(println(_))
+    // sortedList.foreach(println(_))
+    sortedList(sortedList.length-1)
 
-    println("The largest palindrome in a given string is " +sortedList(sortedList.length-1))
+    // println("The largest palindrome in a given string is " +sortedList(sortedList.length-1))
 
   }
 }
