@@ -8,7 +8,7 @@ object AltimetricTestBootstrap extends App{
   val rawRdd = spark.sparkContext.parallelize(Seq(("banana"),("oppoisoppo")))
 
   // rawRdd.foreach(println(_))
-spark.sparkContext.
+
   rawRdd.foreach(palindromeTest(_))
 
   def palindromeTest(s:String) = {
