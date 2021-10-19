@@ -4,8 +4,14 @@ import org.apache.spark.sql.types.{IntegerType, StringType}
 
 object AltimetricTestBootstrap extends App{
 
+ /* Usecase definition:
+    Given a string of n characters, find its largest palindromic substring (LPS). A palindrome is a string that reads same from both the sides. Input: banana Output: anana Input: oppoisoppo Output: oppo
+    If similar such strings (millions in number) are contained in a file, one on each line, write a spark program to find LPS for all strings in the file
+    Which approach will you use for spark program: RDD or DataFrame? Why? Justify when you use RDD over DataFrames.*/
+
+
   val spark = SparkSession.builder().master("local[2]").appName("app-PalindromeTester").getOrCreate()
-  val rawRdd = spark.sparkContext.parallelize(Seq(("banana"),("oppoisoppo")))
+  val rawRdd = spark.sparkContext.parallelize(Seq(("banana"),("oppoisoppo"),("$$ABCBA$$")))
 
   // rawRdd.foreach(println(_))
 
